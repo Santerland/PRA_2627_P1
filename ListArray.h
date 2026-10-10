@@ -34,8 +34,14 @@ class ListArray : public List<T> {
         }
 
     public:
-        ListArray();
-        ~ListArray() override;
+        ListArray() {
+            arr = new T[MINSIZE]; 
+            max = MINSIZE;
+            n = 0;
+        }
+        ~ListArray() override {
+            delete[] arr;
+        }
 
         void insert(int pos, T e) override {
             // esta dentro de rango [0, n]?
@@ -107,7 +113,9 @@ class ListArray : public List<T> {
             return n;
         }
 
-        T operator[](int pos);
+        T operator[](int pos) {
+            return get(pos);
+        }
 
         friend std::ostream& operator<<(std::ostream &out, const ListArray<T>& list) {
             out << "[";
